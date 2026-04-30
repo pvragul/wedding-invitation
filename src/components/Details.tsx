@@ -19,7 +19,7 @@ export default function Details() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 md:mb-24"
         >
-          <h2 className={`text-4xl md:text-5xl text-primary mb-6 ${lang === "ta" ? "font-bamini-34" : "font-serif"}`}>
+          <h2 className={`text-4xl md:text-5xl text-primary mb-6 ${lang === "ta" ? "font-bamini-34 md:text-7xl" : "font-serif"}`}>
             {t("details_title")}
           </h2>
           <p className="max-w-2xl mx-auto text-stone-600 leading-relaxed text-lg">

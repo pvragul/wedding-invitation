@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
+import Countdown from "./Countdown";
 
 export default function Hero() {
   const { t, lang } = useLanguage();
+  // Wedding Date: May 29, 2026 7:00 AM IST
+  const weddingDate = new Date("2026-05-29T07:00:00+05:30");
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
@@ -71,7 +74,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="w-px h-8 md:h-16 bg-white/50 mb-8"
+          className="w-px h-8 md:h-12 bg-white/50 mb-6 md:mb-8"
         />
 
         <motion.p
@@ -82,6 +85,8 @@ export default function Hero() {
         >
           {t("date")}
         </motion.p>
+
+        <Countdown targetDate={weddingDate} />
       </div>
 
       {/* Scroll indicator */}
