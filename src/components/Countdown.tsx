@@ -51,7 +51,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
         <TimeUnit value={timeLeft.seconds} label={t("secs")} lang={lang} />
       </motion.div>
 
-      <div className="flex flex-col sm:flex-row gap-4 items-center md:w-2/3">
+      <div className="flex flex-col sm:flex-row gap-4 items-center w-full px-4 mx-auto">
         <motion.a
           href={googleCalendarUrl}
           target="_blank"
@@ -59,10 +59,10 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.6 }}
-          className="flex items-center gap-2 px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/40 text-white rounded-full transition-all shadow-sm font-medium"
+          className="flex grow w-full md:w-1/2 items-center justify-center gap-2 px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/40 text-white rounded-full transition-all shadow-sm font-medium"
         >
-          <CalendarPlus className="w-5 h-5" />
-          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase"}>
+          <CalendarPlus className="w-5 h-5 shrink-0" />
+          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase truncate"}>
             {t("save_calendar")}
           </span>
         </motion.a>
@@ -73,12 +73,12 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.8 }}
-          className="flex items-center gap-2 px-6 py-3 bg-primary/80 hover:bg-primary backdrop-blur-sm border border-primary/50 text-white rounded-full transition-all shadow-sm font-medium"
+          className="flex grow w-full md:w-1/2 items-center justify-center gap-2 px-6 py-3 bg-primary/80 hover:bg-primary backdrop-blur-sm border border-primary/50 text-white rounded-full transition-all shadow-sm font-medium"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase"}>
+          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase truncate"}>
             {t("download_invitation")}
           </span>
         </motion.a>
