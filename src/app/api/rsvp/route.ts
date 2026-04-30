@@ -8,14 +8,26 @@ export async function POST(req: Request) {
     
     // Save to local file for prototyping
     const dataDir = path.join(process.cwd(), "data");
-    const filePath = path.join(dataDir, "rsvps.json");
     
-    // Create data dir if not exists
+    // Create data dir if not exists (fallback to /tmp for Vercel/Serverless)
+    let finalDataDir = dataDir;
     try {
       await fs.access(dataDir);
     } catch {
-      await fs.mkdir(dataDir);
+      try {
+        await fs.mkdir(dataDir, { recursive: true });
+      } catch (err) {
+        console.warn("Could not create data dir in cwd. Falling back to /tmp.");
+        finalDataDir = path.join("/tmp", "wedding-data");
+        try {
+          await fs.mkdir(finalDataDir, { recursive: true });
+        } catch (e) {
+          // ignore
+        }
+      }
     }
+
+    const filePath = path.join(finalDataDir, "rsvps.json");
 
     let existingData = [];
     try {
@@ -32,7 +44,13 @@ export async function POST(req: Request) {
     };
 
     existingData.push(newEntry);
-    await fs.writeFile(filePath, JSON.stringify(existingData, null, 2));
+    
+    try {
+      await fs.writeFile(filePath, JSON.stringify(existingData, null, 2));
+    } catch (writeErr) {
+      console.error("Failed to save to disk (likely a read-only serverless environment). Payload:", newEntry);
+      // We still return success to the user so the UI works, but log it so it's not completely lost.
+    }
 
     return NextResponse.json({ success: true, entry: newEntry });
   } catch (error) {

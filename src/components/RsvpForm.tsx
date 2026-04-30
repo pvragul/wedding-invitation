@@ -22,12 +22,17 @@ export default function RsvpForm() {
     email: z
       .string()
       .email({ message: t("errors_email") })
+      .or(z.literal(""))
       .optional(),
-    phone: z.string().min(10, { message: t("errors_phone") }),
+    phone: z.string().regex(/^[0-9]{10}$/, { message: t("errors_phone") }),
     attendance: z.enum(["yes", "no", "maybe"], {
       message: t("errors_attending"),
     }),
-    guestsCount: z.number().optional(),
+    guestsCount: z
+      .number()
+      .min(1, { message: t("errors_guests") })
+      .max(10)
+      .optional(),
     dietary: z.string().optional(),
     song: z.string().optional(),
     accessibility: z.string().optional(),
@@ -208,6 +213,22 @@ export default function RsvpForm() {
                   </label>
                   <input
                     {...register("guestsCount")}
+                    onChange={(val) => {
+                      if (
+                        val.target.value === "" ||
+                        parseInt(val.target.value) < 0
+                      ) {
+                        register("guestsCount").onChange({
+                          target: {
+                            value: 0,
+                          },
+                        });
+                      } else {
+                        register("guestsCount").onChange({
+                          target: { value: parseInt(val.target.value) },
+                        });
+                      }
+                    }}
                     type="number"
                     min="1"
                     max="10"
@@ -269,7 +290,12 @@ export default function RsvpForm() {
           </form>
         </motion.div>
       </div>
-      {attendance && <EmojiShower key={showerKey} type={attendance as "yes" | "no" | "maybe"} />}
+      {attendance && (
+        <EmojiShower
+          key={showerKey}
+          type={attendance as "yes" | "no" | "maybe"}
+        />
+      )}
     </section>
   );
 }

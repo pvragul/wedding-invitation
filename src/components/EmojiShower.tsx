@@ -3,8 +3,14 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export default function EmojiShower({ type }: { type: "yes" | "no" | "maybe" }) {
-  const [particles, setParticles] = useState<{ id: number; x: number; delay: number; emoji: string }[]>([]);
+export default function EmojiShower({
+  type,
+}: {
+  type: "yes" | "no" | "maybe";
+}) {
+  const [particles, setParticles] = useState<
+    { id: number; x: number; delay: number; emoji: string }[]
+  >([]);
 
   useEffect(() => {
     let emojis: string[] = [];
@@ -25,7 +31,7 @@ export default function EmojiShower({ type }: { type: "yes" | "no" | "maybe" }) 
   if (!type || particles.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-100 overflow-hidden">
       {particles.map((p) => (
         <motion.div
           key={p.id}
@@ -37,7 +43,7 @@ export default function EmojiShower({ type }: { type: "yes" | "no" | "maybe" }) 
               `${p.x}vw`,
               `${p.x + (Math.random() * 10 - 5)}vw`,
               `${p.x + (Math.random() * 20 - 10)}vw`,
-              `${p.x + (Math.random() * 30 - 15)}vw`
+              `${p.x + (Math.random() * 30 - 15)}vw`,
             ],
             scale: [0.5, 1.5, 1.2, 0.8],
             rotate: [0, Math.random() * 180 - 90, Math.random() * 360 - 180],
@@ -47,7 +53,7 @@ export default function EmojiShower({ type }: { type: "yes" | "no" | "maybe" }) 
             delay: p.delay,
             ease: "easeOut",
           }}
-          className="absolute text-4xl md:text-6xl drop-shadow-md"
+          className="absolute text-3xl md:text-5xl drop-shadow-md"
         >
           {p.emoji}
         </motion.div>

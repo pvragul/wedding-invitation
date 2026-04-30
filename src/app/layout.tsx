@@ -35,6 +35,9 @@ const bamini34 = localFont({
 export const metadata: Metadata = {
   title: "Ragul & Yamuna | Wedding Invitation",
   description: "Join us in celebrating our wedding day.",
+  icons: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='50' fill='%23c2a77d'/><text x='50' y='55' font-family='Georgia, serif' font-size='38' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>R&amp;Y</text></svg>",
+  },
 };
 
 export default function RootLayout({

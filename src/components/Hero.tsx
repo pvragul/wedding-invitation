@@ -97,7 +97,7 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
         <span className="text-white/70 text-[10px] uppercase tracking-[0.2em] mb-3">
-          {t("scroll")}
+          {/* {t("scroll")} */}
         </span>
         <motion.div
           animate={{ y: [0, 10, 0] }}

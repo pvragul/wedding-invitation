@@ -52,6 +52,7 @@ const translations = {
     mins: "Mins",
     secs: "Secs",
     save_calendar: "Save to Calendar",
+    download_invitation: "Download Invitation",
   },
   ta: {
     names_groom: "uhFy;",
@@ -100,6 +101,7 @@ const translations = {
     mins: "நிமிடம்",
     secs: "வினாடி",
     save_calendar: "நாள்காட்டியில் சேமி",
+    download_invitation: "அழைப்பிதழை பதிவிறக்க",
   }
 };
 
