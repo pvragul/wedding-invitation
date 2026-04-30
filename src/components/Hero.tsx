@@ -25,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white flex flex-col items-center px-4 mt-16">
+      <div className="relative w-4/6 z-10 text-center text-white flex flex-col items-center px-4 mt-16">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,12 +35,12 @@ export default function Hero() {
           {t("hero_subtitle")}
         </motion.p>
 
-        <div className="flex flex-col md:flex-row -gap-2 md:gap-4 items-center">
+        <div className="flex flex-col w-full md:flex-row -gap-2 items-center">
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5, type: "spring" }}
-            className={`mb-4 md:mb-8 tracking-wide drop-shadow-md text-stone-50 ${
+            className={`mb-4 md:mb-8 grow w-full md:w-4/5 tracking-wide drop-shadow-md text-stone-50 ${
               lang === "ta"
                 ? "font-bamini-51 text-6xl md:text-8xl lg:text-9xl"
                 : "font-script text-7xl md:text-8xl lg:text-9xl"
@@ -60,7 +60,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5, type: "spring" }}
-            className={`mb-4 md:mb-8 tracking-wide drop-shadow-md text-stone-50 ${
+            className={`mb-4 md:mb-8 grow w-full md:w-4/5 tracking-wide drop-shadow-md text-stone-50 ${
               lang === "ta"
                 ? "font-bamini-51 text-6xl md:text-8xl lg:text-9xl"
                 : "font-script text-7xl md:text-8xl lg:text-9xl"

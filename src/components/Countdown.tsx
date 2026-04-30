@@ -38,7 +38,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ragul+and+Yamuna+Wedding&dates=20260529T013000Z/20260529T053000Z&details=Join+us+for+our+wedding+celebration!&location=Manickam+Mahal,+Salai+Nagar,+Thamaleri+Muthur,+Tiruppathur,+Tamil+Nadu`;
 
   return (
-    <div className="flex flex-col items-center mt-6 w-full">
+    <div className="flex flex-col items-center mt-6 w-full md:px-20">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
