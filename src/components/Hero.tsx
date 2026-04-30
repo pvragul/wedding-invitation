@@ -25,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative w-4/6 z-10 text-center text-white flex flex-col items-center px-4 mt-16">
+      <div className="relative md:w-4/6 z-10 text-center text-white flex flex-col items-center px-4 mt-16">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5, type: "spring" }}
-            className={`mb-4 md:mb-8 grow w-full md:w-4/5 tracking-wide drop-shadow-md text-stone-50 ${
+            className={`mb-0 md:mb-8 grow w-full md:w-4/5 tracking-wide drop-shadow-md text-stone-50 ${
               lang === "ta"
                 ? "font-bamini-51 text-6xl md:text-8xl lg:text-9xl"
                 : "font-script text-7xl md:text-8xl lg:text-9xl"
@@ -52,7 +52,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5, type: "spring" }}
-            className={`mb-4 md:mb-8 tracking-wide drop-shadow-md text-stone-50 ${"text-2xl md:text-6xl lg:text-7xl"}`}
+            className={`-mb-2 md:mb-8 tracking-wide drop-shadow-md text-stone-50 ${"text-2xl md:text-6xl lg:text-7xl"}`}
           >
             &
           </motion.span>
@@ -74,7 +74,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="w-px h-8 md:h-12 bg-white/50 mb-6 md:mb-8"
+          className="w-px h-6 md:h-12 bg-white/50 mb-6 md:mb-8"
         />
 
         <motion.p

@@ -17,17 +17,19 @@ export default function Details() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-8 md:mb-24"
         >
-          <h2 className={`text-4xl md:text-5xl text-primary mb-6 ${lang === "ta" ? "font-bamini-34 md:text-7xl" : "font-serif"}`}>
+          <h2 className={`text-5xl md:text-5xl text-primary mb-6 ${lang === "ta" ? "font-bamini-34 md:text-6xl" : "font-serif"}`}>
             {t("details_title")}
           </h2>
-          <p className="max-w-2xl mx-auto text-stone-600 leading-relaxed text-lg">
-            {t("details_subtitle")}
+          <p className={`max-w-2xl mx-auto text-stone-600 leading-relaxed text-lg ${lang === "ta" ? "text-xs md:text-xl" : "font-serif"}`}>
+            {t("details_subtitle").split('\n').map((line, i) => (
+              <span key={i}>{line}<br /></span>
+            ))}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-12 md:gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-16">
           <DetailCard 
             icon={<CalendarDays className="w-8 h-8 text-primary" />}
             title={t("when_reception")}
@@ -62,7 +64,7 @@ export default function Details() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-col items-center justify-center p-8 bg-white border border-stone-100 rounded-lg shadow-sm"
         >
-          <h3 className={`text-2xl mb-6 text-stone-800 ${lang === "ta" ? "font-bamini-34" : "font-serif"}`}>
+          <h3 className={`text-2xl mb-6 text-stone-800 ${lang === "ta" ? "text-xl font-semibold" : "font-serif"}`}>
             {t("navigate")}
           </h3>
           <div className="bg-white p-4 border border-stone-100 rounded-xl shadow-sm mb-6">
