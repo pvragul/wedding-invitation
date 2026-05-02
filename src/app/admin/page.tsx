@@ -6,22 +6,30 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminRSVPs() {
   let rsvps: any[] = [];
+  let activities: any[] = [];
 
-  try {
-    const dataDir = path.join(process.cwd(), "data");
-    const filePath = path.join(dataDir, "rsvps.json");
-    const fileData = await fs.readFile(filePath, "utf-8");
-    rsvps = JSON.parse(fileData);
-  } catch {
-    // If it fails to read from cwd, try /tmp fallback
+  const dataDir = path.join(process.cwd(), "data");
+  const fallbackDir = path.join("/tmp", "wedding-data");
+
+  // Helper to read data with fallback
+  async function readData(filename: string) {
     try {
-      const fallbackPath = path.join("/tmp", "wedding-data", "rsvps.json");
-      const fileData = await fs.readFile(fallbackPath, "utf-8");
-      rsvps = JSON.parse(fileData);
+      const filePath = path.join(dataDir, filename);
+      const fileData = await fs.readFile(filePath, "utf-8");
+      return JSON.parse(fileData);
     } catch {
-      rsvps = [];
+      try {
+        const fallbackPath = path.join(fallbackDir, filename);
+        const fileData = await fs.readFile(fallbackPath, "utf-8");
+        return JSON.parse(fileData);
+      } catch {
+        return [];
+      }
     }
   }
+
+  rsvps = await readData("rsvps.json");
+  activities = await readData("activity.json");
 
   // Sort by newest first
   rsvps.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -32,18 +40,55 @@ export default async function AdminRSVPs() {
   const notAttending = rsvps.filter((r) => r.attendance === "no").length;
   const maybeAttending = rsvps.filter((r) => r.attendance === "maybe").length;
 
+  // Activity Stats
+  const totalVisits = activities.filter(a => a.type === "page_visit").length;
+  const newVisitors = activities.filter(a => a.type === "new_visitor").length;
+  const totalClicks = activities.filter(a => a.type === "button_click").length;
+  
+  const clickBreakdown = activities.reduce((acc: any, curr: any) => {
+    if (curr.type === "button_click" && curr.data?.buttonId) {
+      acc[curr.data.buttonId] = (acc[curr.data.buttonId] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
   return (
     <div className="min-h-screen bg-stone-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-serif text-stone-900 mb-8 text-center">RSVP Dashboard</h1>
+        <h1 className="text-4xl font-serif text-stone-900 mb-8 text-center">Admin Dashboard</h1>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <StatCard title="Total Responses" value={totalRSVPs} />
-          <StatCard title="Total Guests Coming" value={totalGuests} highlight />
-          <StatCard title="Not Attending" value={notAttending} />
-          <StatCard title="Maybe" value={maybeAttending} />
+        {/* Activity Stats Section */}
+        <div className="mb-12">
+          <h2 className="text-xl font-medium text-stone-700 mb-4 border-b border-stone-200 pb-2">Activity Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <StatCard title="Total Page Visits" value={totalVisits} />
+            <StatCard title="Unique Visitors" value={newVisitors} />
+            <StatCard title="Total Interactions" value={totalClicks} />
+          </div>
+          
+          {totalClicks > 0 && (
+            <div className="mt-4 flex flex-wrap gap-4 justify-center">
+              {Object.entries(clickBreakdown).map(([key, val]: [string, any]) => (
+                <div key={key} className="bg-stone-100 px-3 py-1 rounded-full text-xs text-stone-600 border border-stone-200">
+                  <span className="font-semibold uppercase">{key.replace("_", " ")}:</span> {val}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* RSVP Stats Row */}
+        <div className="mb-12">
+          <h2 className="text-xl font-medium text-stone-700 mb-4 border-b border-stone-200 pb-2">RSVP Summary</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <StatCard title="Total Responses" value={totalRSVPs} />
+            <StatCard title="Total Guests Coming" value={totalGuests} highlight />
+            <StatCard title="Not Attending" value={notAttending} />
+            <StatCard title="Maybe" value={maybeAttending} />
+          </div>
+        </div>
+
+        <h2 className="text-xl font-medium text-stone-700 mb-4 border-b border-stone-200 pb-2">Detailed RSVPs</h2>
 
         {/* Table */}
         <div className="bg-white shadow-sm rounded-xl border border-stone-200 overflow-hidden">

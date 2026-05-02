@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarPlus } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { trackEvent } from "./ActivityTracker";
 
 export default function Countdown({ targetDate }: { targetDate: Date }) {
   const { t, lang } = useLanguage();
@@ -56,6 +57,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
           href={googleCalendarUrl}
           target="_blank"
           rel="noreferrer"
+          onClick={() => trackEvent("button_click", { buttonId: "save_calendar" })}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.6 }}
@@ -70,6 +72,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
         <motion.a
           href="/tamil-hero-bg.png"
           download="Ragul_Yamuna_Invitation.png"
+          onClick={() => trackEvent("button_click", { buttonId: "download_invitation" })}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.8 }}

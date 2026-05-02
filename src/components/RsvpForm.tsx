@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import EmojiShower from "./EmojiShower";
+import { trackEvent } from "./ActivityTracker";
 
 export default function RsvpForm() {
   const { t } = useLanguage();
@@ -65,6 +66,7 @@ export default function RsvpForm() {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     setErrorMsg("");
+    trackEvent("button_click", { buttonId: "rsvp_submit", attendance: data.attendance });
     try {
       const response = await fetch("/api/rsvp", {
         method: "POST",

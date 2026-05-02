@@ -1,0 +1,25 @@
+[
+  {
+    "id": "1777745946172",
+    "timestamp": "2026-05-02T18:19:06.172Z",
+    "type": "new_visitor"
+  },
+  {
+    "id": "1777746092843",
+    "timestamp": "2026-05-02T18:21:32.843Z",
+    "type": "page_visit"
+  },
+  {
+    "id": "1777746124643",
+    "timestamp": "2026-05-02T18:22:04.643Z",
+    "type": "page_visit"
+  },
+  {
+    "id": "1777746134639",
+    "timestamp": "2026-05-02T18:22:14.639Z",
+    "type": "button_click",
+    "data": {
+      "buttonId": "save_calendar"
+    }
+  }
+]
