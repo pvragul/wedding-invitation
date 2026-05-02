@@ -40,7 +40,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
 
   return (
     <div className="flex flex-col items-center mt-6 w-full md:px-20">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.4 }}
@@ -57,31 +57,57 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
           href={googleCalendarUrl}
           target="_blank"
           rel="noreferrer"
-          onClick={() => trackEvent("button_click", { buttonId: "save_calendar" })}
+          onClick={() =>
+            trackEvent("button_click", { buttonId: "save_calendar" })
+          }
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.6 }}
           className="flex grow w-full md:w-1/2 items-center justify-center gap-2 px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/40 text-white rounded-full transition-all shadow-sm font-medium"
         >
           <CalendarPlus className="w-5 h-5 shrink-0" />
-          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase truncate"}>
+          <span
+            className={
+              lang === "ta"
+                ? "text-sm tracking-wide"
+                : "text-sm tracking-widest uppercase truncate"
+            }
+          >
             {t("save_calendar")}
           </span>
         </motion.a>
 
         <motion.a
-          href="/tamil-hero-bg.png"
-          download="Ragul_Yamuna_Invitation.png"
-          onClick={() => trackEvent("button_click", { buttonId: "download_invitation" })}
+          href="/Ragul-Yamuna-Wedding-Invitation.pdf"
+          download="Ragul_Yamuna_Wedding_Invitation.pdf"
+          onClick={() =>
+            trackEvent("button_click", { buttonId: "download_invitation" })
+          }
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.8 }}
           className="flex grow w-full md:w-1/2 items-center justify-center gap-2 px-6 py-3 bg-primary/80 hover:bg-primary backdrop-blur-sm border border-primary/50 text-white rounded-full transition-all shadow-sm font-medium"
         >
-          <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          <svg
+            className="w-5 h-5 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            />
           </svg>
-          <span className={lang === "ta" ? "text-sm tracking-wide" : "text-sm tracking-widest uppercase truncate"}>
+          <span
+            className={
+              lang === "ta"
+                ? "text-sm tracking-wide"
+                : "text-sm tracking-widest uppercase truncate"
+            }
+          >
             {t("download_invitation")}
           </span>
         </motion.a>
@@ -90,13 +116,23 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
   );
 }
 
-function TimeUnit({ value, label, lang }: { value: number; label: string; lang: string }) {
+function TimeUnit({
+  value,
+  label,
+  lang,
+}: {
+  value: number;
+  label: string;
+  lang: string;
+}) {
   return (
     <div className="flex flex-col items-center">
       <span className="text-3xl md:text-5xl font-sans mb-1 drop-shadow-md">
         {value.toString().padStart(2, "0")}
       </span>
-      <span className={`text-[10px] md:text-xs uppercase opacity-90 ${lang === "ta" ? "tracking-wide" : "tracking-[0.2em]"}`}>
+      <span
+        className={`text-[10px] md:text-xs uppercase opacity-90 ${lang === "ta" ? "tracking-wide" : "tracking-[0.2em]"}`}
+      >
         {label}
       </span>
     </div>
